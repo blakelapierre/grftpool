@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker pull redis:alpine
-docker pull blakelapierre/xtlpool-daemon
-docker pull blakelapierre/xtlpool-wallet
-docker pull blakelapierre/xtlpool-pool
-docker pull blakelapierre/xtlpool-www
+docker pull blakelapierre/grftpool-daemon
+docker pull blakelapierre/grftpool-wallet
+docker pull blakelapierre/grftpool-pool
+docker pull blakelapierre/grftpool-www
