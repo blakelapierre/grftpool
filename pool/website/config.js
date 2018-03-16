@@ -1,4 +1,4 @@
-var api = window.location.protocol + "//" window.location.host + ":8117";
+var api = window.location.protocol + "//" + window.location.host + ":8117";
 
 var poolHost = window.location.host;
 
