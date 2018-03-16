@@ -1,11 +1,28 @@
-FROM ubuntu
+FROM ubuntu:16.04
 
-RUN apt-get update
-RUN apt-get install -y wget
+ENV SRC_DIR /usr/local/src/graft
 
-RUN wget https://github.com/stellitecoin/Stellite/releases/download/1.2.1.0/linux-x64-1.2.1.0.zip
-RUN unzip linux-x64-1.2.1.0.zip -d coin
-RUN mv linux-x64-1.2.1.0 coin
+RUN set -x \
+  && buildDeps=' \
+      ca-certificates \
+      cmake \
+      g++ \
+      git \
+      libboost1.58-all-dev \
+      libssl-dev \
+      make \
+      pkg-config \
+  ' \
+  && apt-get -qq update \
+  && apt-get -qq --no-install-recommends install $buildDeps
 
+RUN git clone https://github.com/graft-project/GraftNetwork.git $SRC_DIR
+WORKDIR $SRC_DIR
+RUN make -j$(nproc) release-static
 
-CMD cd coin/bin && ./stellited --data-dir /daemon-data
+RUN cp build/release/bin/* /usr/local/bin/ \
+  \
+  && rm -r $SRC_DIR \
+  && apt-get -qq --auto-remove purge $buildDeps
+
+CMD /bin/bash
