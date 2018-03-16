@@ -1,8 +1,6 @@
-var api = "http://poolhost.com:1117";
+var api = window.location.protocol + "//" window.location.host + ":8117";
 
-var api_blockexplorer = "http://daemonhost.com:1118";
-
-var poolHost = "poolhost.com";
+var poolHost = window.location.host;
 
 var irc = "irc.freenode.net/#poolhost";
 
